@@ -11,11 +11,6 @@ public class PrintListUsingFP {
 
 	private static void printListElementsFunctionally(List<Integer> intList) {
 		intList.stream()
-				.forEach(PrintListUsingFP::printList);
+				.forEach(System.out::println);
 	}
-	
-	private static void printList(int number){
-		System.out.println(number);
-	}
-
 }
