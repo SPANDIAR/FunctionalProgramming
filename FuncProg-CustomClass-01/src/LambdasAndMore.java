@@ -1,5 +1,7 @@
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -13,9 +15,9 @@ public class LambdasAndMore {
 				new Books("The Street Lawyer", "John Grisham", "English", 3.9F, "Fiction"),
 				new Books("1408", "Stephen King", "English", 4.77F, "Horror"),
 				new Books("The Prodigal Daughter", "Jeffrey Archer", "English", 3.7F, "Fiction"),
-				new Books("Kane & Abel", "Jeffrey Archer", "English", 4.32F, "Classic"),
+				new Books("Kane & Abel", "Jeffrey Archer", "English", 4.32F, "Fiction"),
 				new Books("Paarthiban Kanavu", "Amarar Kalki", "Tamil", 4.28F, "Classic"),
-				new Books("Kamba Ramayanam", "Kambar", "Tamil", 4.73F, "Classic"),
+				new Books("Kamba Ramayanam", "Kambar", "Tamil", 4.73F, "Literature"),
 				new Books("Thirukhural", "Thiruvalluvar", "Tamil", 4.84F, "Literature")
 				);
 		
@@ -86,6 +88,43 @@ public class LambdasAndMore {
 		System.out.println("Books - Average Ratings");
 		
 		System.out.println(favouriteBooks.stream().mapToDouble(Books::getRating).average());
+		
+		// Grouping the books by Category
+		System.out.println(" ");
+		System.out.println(" ");
+		System.out.println("Grouping the books by Category");
+		
+		System.out.println(favouriteBooks.stream()
+				.collect(Collectors.groupingBy(Books::getCategory)));
+		
+		// Grouping the Book Names by Category
+				System.out.println(" ");
+				System.out.println(" ");
+				System.out.println("Grouping the Book Names by Category");
+				
+				System.out.println(favouriteBooks.stream()
+						.collect(Collectors.groupingBy(Books::getCategory
+								, Collectors.mapping(Books::getBookName, Collectors.toList()))));
+		
+		
+		// Grouping the books by Category with counts
+				System.out.println(" ");
+				System.out.println(" ");
+				System.out.println("Grouping the books by Category with counts");
+				
+				System.out.println(favouriteBooks.stream()
+						.collect(Collectors.groupingBy(Books::getCategory,
+								Collectors.counting())));
+				
+		// Best book in each category
+		System.out.println(" ");
+		System.out.println(" ");
+		System.out.println("Best book in each category");
+				
+		System.out.println(favouriteBooks.stream()
+						.collect(Collectors.groupingBy(Books::getCategory,
+								Collectors.maxBy(Comparator.comparing(Books::getRating)))));
+	
 	}
 }
 
