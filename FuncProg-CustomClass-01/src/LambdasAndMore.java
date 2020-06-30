@@ -1,7 +1,5 @@
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -60,6 +58,7 @@ public class LambdasAndMore {
 		System.out.println(" ");
 		System.out.println(" ");
 		System.out.println("Get all Tamil Books");
+		
 		
 		System.out.println(favouriteBooks.stream()
 						.filter(books -> books.getLanguage().contentEquals("Tamil"))
