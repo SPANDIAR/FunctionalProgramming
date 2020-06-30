@@ -26,12 +26,12 @@ public class StockPrice {
 //			}
 //		}
 		
-		while(counter++ < 3) {
+		while(!subscriber.isUnsubscribed()) {
 			symbols.stream()
 					.map(StockPrice::getStockPrice)
+					.filter(data -> !subscriber.isUnsubscribed())
 					.forEach(subscriber::onNext);
 		}
-		
 		subscriber.onCompleted();
 	}
 	
