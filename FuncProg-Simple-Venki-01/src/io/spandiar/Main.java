@@ -1,8 +1,10 @@
 package io.spandiar;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
@@ -12,6 +14,7 @@ import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.Collectors.*;
 
 public class Main {
 	
@@ -58,10 +61,24 @@ public class Main {
 		
 		System.out.println(groupByNationalityAndName);
 		
+		// Find no of people grouped by Nationality
 		Map<String, Integer> countsByNationality = person.stream()
 				.collect(Collectors.groupingBy(Person::getNationality, Collectors.collectingAndThen(Collectors.counting(), Long::intValue)));
 		
 		System.out.println(countsByNationality);
+		
+		// find the youngest person's name
+		
+//		Optional<Person> minAge = person.stream()
+//			.min(Comparator.comparing(Person::getAge));
+		
+		String minAge = person.stream()
+			.collect(Collectors.collectingAndThen(
+							Collectors.minBy(Comparator.comparing(Person::getAge)), 
+							p -> p.map(Person::getName).orElse(" ")));
+		
+		System.out.println(minAge);
+		
 		
 	}
 	
